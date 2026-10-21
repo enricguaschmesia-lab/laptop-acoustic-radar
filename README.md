@@ -57,17 +57,13 @@ front end now measure how the room's echoes change, which is exactly what a rada
 
 ```mermaid
 flowchart LR
-    TX["Periodic OFDM sounder<br/>64 subcarriers, 6–10 kHz"] --> SPK["Laptop speaker"]
-    SPK -- "room + people" --> MIC["Laptop mics (2)"]
-    MIC --> SYNC["Preamble sync<br/>(port of the MATLAB link)"]
-    SYNC --> LS["LS channel estimate<br/>every 16 ms"]
-    LS --> CIR["64-tap impulse response<br/>4.3 cm range bins"]
-    CIR --> CLUT["Static clutter removal"]
-    CLUT --> MAPS["Range-Doppler and<br/>range-time maps"]
-    CLUT --> PHASE["Chest-bin phase<br/>(circle-fit demodulation)"]
-    MAPS --> FEAT["10 features<br/>+ LR / random forest"]
-    MAPS --> CNN["Small CNN"]
-    PHASE --> BR["Breathing rate"]
+    TX["<b>Speaker</b><br/>periodic OFDM sounder<br/>64 subcarriers, 6–10 kHz"] -- "room + people" --> MIC["<b>2 mics</b><br/>same audio clock"]
+    MIC --> RX["<b>Sync + LS estimate</b><br/>64-tap impulse response<br/>every 16 ms, 4.3 cm bins"]
+    RX --> CLUT["<b>Clutter removal</b><br/>static echoes out"]
+    CLUT --> MAPS["<b>Range-Doppler +<br/>range-time maps</b>"]
+    CLUT --> PHASE["<b>Chest-bin phase</b><br/>circle-fit demodulation"]
+    MAPS --> CLS["<b>Presence + activity</b><br/>features + LR / RF<br/>small CNN"]
+    PHASE --> BR["<b>Breathing rate</b><br/>multi-bin voting"]
 ```
 
 ---
