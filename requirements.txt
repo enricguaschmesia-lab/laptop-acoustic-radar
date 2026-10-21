@@ -1,0 +1,9 @@
+# Versions the results were produced with (Python 3.13, Windows 11).
+# For a looser install use `pip install -e ".[ml,dev]"`.
+numpy==2.5.4
+scipy==1.16.2
+matplotlib==3.11.2
+sounddevice==0.5.6
+scikit-learn==1.7.2
+torch==2.9.0
+pytest==9.0.2
